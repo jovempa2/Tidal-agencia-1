@@ -1,0 +1,2628 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agência TIDAL - Transformando o Digital</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100%;
+        }
+
+        html {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        /* Animated Gradient Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 25%, #0a1a0a 50%, #1a0a1a 75%, #0a0a0a 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Floating Neon Orbs */
+        .neon-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .neon-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: floatOrb 20s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #00ff88 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            animation-duration: 25s;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #ff1493 0%, transparent 70%);
+            bottom: -250px;
+            right: -250px;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+
+        .orb3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #00ff88 0%, transparent 70%);
+            top: 50%;
+            right: 10%;
+            animation-duration: 35s;
+            animation-delay: -15s;
+        }
+
+        .orb4 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #ff1493 0%, transparent 70%);
+            bottom: 30%;
+            left: 15%;
+            animation-duration: 28s;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, -80px) scale(1.1); }
+            50% { transform: translate(-50px, 100px) scale(0.9); }
+            75% { transform: translate(80px, 50px) scale(1.05); }
+        }
+
+        /* Grid Overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Content Container */
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0, 255, 136, 0.2);
+            padding: 20px 0;
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(0, 255, 136, 0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo TIDAL - Neon Futurista */
+        .logo {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, #00ff88 0%, #ffffff 50%, #ff1493 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(0, 255, 136, 0.8), 0 0 80px rgba(255, 20, 147, 0.6);
+            animation: logoGlow 3s ease-in-out infinite;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        @keyframes logoGlow {
+            0%, 100% {
+                filter: brightness(1) drop-shadow(0 0 20px rgba(0, 255, 136, 0.8));
+            }
+            50% {
+                filter: brightness(1.3) drop-shadow(0 0 40px rgba(255, 20, 147, 0.9));
+            }
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 255, 136, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-btn:hover {
+            border-color: #00ff88;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6), inset 0 0 20px rgba(0, 255, 136, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .nav-btn.active {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: transparent;
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 30px 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid rgba(0, 255, 136, 0.4);
+            border-radius: 50px;
+            color: #00ff88;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            animation: pulseBadge 2s infinite;
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(0, 255, 136, 0.7);
+                transform: scale(1.05);
+            }
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0 0 30px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #00ff88 30%, #ff1493 70%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 80px rgba(0, 255, 136, 0.5);
+            animation: titleShine 5s linear infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes titleShine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0 0 50px 0;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 18px 45px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            color: #0a0a0a;
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5);
+            border: 2px solid #00ff88;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.8);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ff1493;
+            border: 2px solid #ff1493;
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 20, 147, 0.2);
+            box-shadow: 0 0 40px rgba(255, 20, 147, 0.6);
+            transform: translateY(-5px);
+        }
+
+        .btn-sm {
+            padding: 10px 24px;
+            font-size: 13px;
+        }
+
+        .btn-danger {
+            background: transparent;
+            color: #ff1493;
+            border: 2px solid #ff1493;
+        }
+
+        .btn-danger:hover {
+            background: rgba(255, 20, 147, 0.2);
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.6);
+        }
+
+        /* 3D Floating Service Cards */
+        .services-section {
+            padding: 100px 30px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            padding: 10px 25px;
+            background: rgba(255, 20, 147, 0.1);
+            border: 2px solid rgba(255, 20, 147, 0.4);
+            border-radius: 50px;
+            color: #ff1493;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 56px;
+            font-weight: 900;
+            margin: 0 0 20px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #00ff88 50%, #ff1493 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            perspective: 1500px;
+        }
+
+        .service-card {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 30px;
+            padding: 50px 35px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #00ff88, #ff1493);
+            border-radius: 30px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-20px) rotateX(5deg);
+            box-shadow: 0 30px 80px rgba(0, 255, 136, 0.4);
+        }
+
+        .service-icon {
+            font-size: 100px;
+            margin-bottom: 25px;
+            display: inline-block;
+            filter: drop-shadow(0 15px 40px rgba(0, 255, 136, 0.6));
+            animation: iconFloat 4s infinite ease-in-out;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0) rotateY(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotateY(180deg);
+            }
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotateY(360deg);
+            filter: drop-shadow(0 20px 60px rgba(255, 20, 147, 0.8));
+        }
+
+        .service-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #00ff88;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .service-description {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-section {
+            padding: 100px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .filter-tab {
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+            color: #00ff88;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 35px;
+        }
+
+        .portfolio-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-15px);
+            border-color: #00ff88;
+            box-shadow: 0 25px 70px rgba(0, 255, 136, 0.5);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #00ff88 0%, #ff1493 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portfolio-content {
+            padding: 30px;
+        }
+
+        .portfolio-tag {
+            display: inline-block;
+            padding: 6px 15px;
+            background: rgba(0, 255, 136, 0.15);
+            border: 1px solid rgba(0, 255, 136, 0.4);
+            border-radius: 50px;
+            color: #00ff88;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0 0 12px 0;
+        }
+
+        .portfolio-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin: 0 0 20px 0;
+        }
+
+        .portfolio-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .portfolio-link {
+            padding: 8px 18px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 50px;
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-link:hover {
+            background: rgba(0, 255, 136, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            border-radius: 30px;
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        /* How It Works */
+        .how-section {
+            padding: 100px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .how-step {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 20, 147, 0.3);
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .how-step:hover {
+            transform: translateY(-10px);
+            border-color: #ff1493;
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.4);
+        }
+
+        .how-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff1493 0%, #ff6bb5 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0 auto 25px auto;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+        }
+
+        .how-step-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: #ff1493;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+        }
+
+        .how-step-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Quote Options */
+        .quote-section {
+            padding: 100px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .quote-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .quote-option {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            border-radius: 30px;
+            padding: 50px 35px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-option::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #00ff88, #ff1493);
+            border-radius: 30px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .quote-option:hover::before,
+        .quote-option.selected::before {
+            opacity: 1;
+        }
+
+        .quote-option:hover,
+        .quote-option.selected {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 255, 136, 0.5);
+        }
+
+        .quote-icon {
+            font-size: 90px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 15px 40px rgba(0, 255, 136, 0.6));
+        }
+
+        .quote-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #00ff88;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+        }
+
+        .quote-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Form */
+        .form-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #00ff88;
+            margin: 0 0 35px 0;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: #ffffff;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        /* Admin Section */
+        .admin-section {
+            padding: 120px 30px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            border-radius: 25px;
+            padding: 35px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: #00ff88;
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.4);
+        }
+
+        .stat-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(0, 255, 136, 0.5));
+        }
+
+        .stat-value {
+            font-size: 42px;
+            font-weight: 900;
+            color: #00ff88;
+            margin: 0 0 10px 0;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(0, 255, 136, 0.2);
+            padding-bottom: 20px;
+        }
+
+        .admin-tab {
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px 50px 0 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .admin-tab:hover,
+        .admin-tab.active {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: #00ff88;
+            color: #00ff88;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
+        }
+
+        .admin-tab-content {
+            display: none;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .project-item {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            border-color: #00ff88;
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(0, 255, 136, 0.2);
+            padding: 80px 30px 30px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            font-weight: 900;
+            color: #00ff88;
+            margin: 0 0 25px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-logo-text {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00ff88 0%, #ffffff 50%, #ff1493 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            margin: 0 0 25px 0;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-link:hover {
+            color: #00ff88;
+            transform: translateX(5px);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 22px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+            color: #00ff88;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+        }
+
+        .admin-link {
+            color: rgba(0, 255, 136, 0.3);
+            text-decoration: none;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-link:hover {
+            color: #00ff88;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .login-box {
+            background: rgba(10, 10, 10, 0.95);
+            border: 3px solid rgba(0, 255, 136, 0.3);
+            border-radius: 30px;
+            padding: 60px 50px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 30px 100px rgba(0, 255, 136, 0.5);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-icon {
+            text-align: center;
+            font-size: 80px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 10px 30px rgba(0, 255, 136, 0.6));
+        }
+
+        .login-title {
+            font-size: 32px;
+            font-weight: 900;
+            text-align: center;
+            margin: 0 0 15px 0;
+            color: #00ff88;
+            text-transform: uppercase;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 0 40px 0;
+        }
+
+        .login-error {
+            background: rgba(255, 20, 147, 0.2);
+            border: 2px solid rgba(255, 20, 147, 0.5);
+            color: #ff1493;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: center;
+            display: none;
+            font-weight: 700;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+        /* Loading */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(10, 10, 10, 0.3);
+            border-radius: 50%;
+            border-top-color: #0a0a0a;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .empty-icon {
+            font-size: 100px;
+            opacity: 0.3;
+            margin-bottom: 25px;
+        }
+
+        .empty-text {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            color: #0a0a0a;
+            padding: 20px 35px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 15px;
+            box-shadow: 0 15px 50px rgba(0, 255, 136, 0.6);
+            animation: slideInRight 0.4s ease;
+            z-index: 20000;
+            border: 2px solid #00ff88;
+        }
+
+        .toast.error {
+            background: linear-gradient(135deg, #ff1493 0%, #ff3d7f 100%);
+            color: #ffffff;
+            border-color: #ff1493;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(500px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 86px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(30px);
+                border-top: 1px solid rgba(0, 255, 136, 0.2);
+                flex-direction: column;
+                padding: 20px;
+                display: none;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            }
+
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .logo {
+                font-size: 28px;
+                letter-spacing: 4px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .services-grid,
+            .portfolio-grid,
+            .quote-options {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toast {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+            }
+
+            .admin-tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-title {
+                font-size: 56px;
+            }
+
+            .section-title {
+                font-size: 42px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Animated Background -->
+  <div class="animated-bg"></div>
+  <div class="neon-orbs">
+   <div class="neon-orb orb1"></div>
+   <div class="neon-orb orb2"></div>
+   <div class="neon-orb orb3"></div>
+   <div class="neon-orb orb4"></div>
+  </div>
+  <div class="grid-overlay"></div><!-- Login Modal -->
+  <div id="login-modal" class="login-modal hidden">
+   <div class="login-box">
+    <div class="login-icon">
+     🔐
+    </div>
+    <h2 class="login-title">Área Administrativa</h2>
+    <p class="login-subtitle">Acesso restrito para administradores</p>
+    <div id="login-error" class="login-error">
+     ❌ Credenciais inválidas
+    </div>
+    <form id="login-form">
+     <div class="form-group"><label for="username" class="form-label">Login</label> <input type="text" id="username" class="form-input" required placeholder="Digite seu login">
+     </div>
+     <div class="form-group"><label for="password" class="form-label">Senha</label> <input type="password" id="password" class="form-input" required placeholder="Digite sua senha">
+     </div><button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;"> <span>🚀 Entrar</span> </button>
+    </form>
+   </div>
+  </div>
+  <div class="content"><!-- Header -->
+   <header class="header">
+    <div class="header-content">
+     <div class="logo" onclick="navigateTo('home')">
+      TIDAL
+     </div><button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+     <nav class="nav-menu" id="nav-menu"><button class="nav-btn active" onclick="navigateTo('home')">Início</button> <button class="nav-btn" onclick="navigateTo('portfolio')">Portfólio</button> <button class="nav-btn" onclick="navigateTo('quote')">Orçamento</button>
+     </nav>
+    </div>
+   </header><!-- HOME PAGE -->
+   <main id="page-home"><!-- Hero Section -->
+    <section class="hero">
+     <div class="hero-content">
+      <div class="hero-badge">
+       ✨ AGÊNCIA DIGITAL FUTURISTA
+      </div>
+      <h1 class="hero-title" id="hero-title">Transformando Ideias em Realidade Digital</h1>
+      <p class="hero-subtitle" id="hero-subtitle">Criatividade, Inovação e Tecnologia que Brilham</p>
+      <div class="hero-buttons"><button class="btn btn-primary" onclick="navigateTo('portfolio')"> <span>🎨 Ver Portfólio</span> </button> <button class="btn btn-secondary" onclick="navigateTo('quote')"> <span>💬 Fazer Orçamento</span> </button>
+      </div>
+     </div>
+    </section><!-- Services Section -->
+    <section class="services-section">
+     <div class="section-header">
+      <div class="section-label">
+       NOSSOS SERVIÇOS
+      </div>
+      <h2 class="section-title">O Que Fazemos</h2>
+      <p class="section-subtitle">Soluções completas para transformar seu negócio</p>
+     </div>
+     <div class="services-grid">
+      <div class="service-card" onclick="navigateTo('quote', 'design')">
+       <div class="service-icon">
+        🎨
+       </div>
+       <h3 class="service-title">Design Criativo</h3>
+       <p class="service-description">Logos, identidade visual, posts, banners e artes gráficas que destacam sua marca</p>
+      </div>
+      <div class="service-card" onclick="navigateTo('quote', 'marketing')">
+       <div class="service-icon">
+        📢
+       </div>
+       <h3 class="service-title">Marketing Digital</h3>
+       <p class="service-description">Anúncios, campanhas, social media e gestão de tráfego para resultados reais</p>
+      </div>
+      <div class="service-card" onclick="navigateTo('quote', 'web')">
+       <div class="service-icon">
+        ����
+       </div>
+       <h3 class="service-title">Sites &amp; Programação</h3>
+       <p class="service-description">Websites, landing pages, sistemas e desenvolvimento web de alta performance</p>
+      </div>
+     </div>
+    </section><!-- Portfolio Preview -->
+    <section class="portfolio-section">
+     <div class="section-header">
+      <div class="section-label">
+       TRABALHOS RECENTES
+      </div>
+      <h2 class="section-title">Nossos Projetos</h2>
+      <p class="section-subtitle">Experiências que transformam marcas</p>
+     </div>
+     <div id="home-preview" class="portfolio-grid"></div>
+     <div style="text-align: center; margin-top: 50px;"><button class="btn btn-secondary" onclick="navigateTo('portfolio')"> <span>Ver Todos os Projetos →</span> </button>
+     </div>
+    </section><!-- About Section -->
+    <section class="about-section">
+     <div class="section-header">
+      <div class="section-label">
+       SOBRE NÓS
+      </div>
+      <h2 class="section-title" id="about-title">Quem Somos</h2>
+     </div>
+     <div class="about-content">
+      <p class="about-text" id="about-text">Somos uma agência digital especializada em criar experiências únicas e memoráveis. Com foco em inovação, criatividade e tecnologia de ponta, transformamos ideias em soluções digitais que geram resultados reais. Nossa equipe de especialistas trabalha com dedicação para entregar projetos que superam expectativas e elevam marcas a um novo patamar.</p>
+     </div>
+    </section><!-- How It Works -->
+    <section class="how-section">
+     <div class="section-header">
+      <div class="section-label">
+       PROCESSO
+      </div>
+      <h2 class="section-title" id="how-title">Como Funciona</h2>
+     </div>
+     <div class="how-grid">
+      <div class="how-step">
+       <div class="how-number">
+        1
+       </div>
+       <h3 class="how-step-title">Solicite Orçamento</h3>
+       <p class="how-step-text">Escolha o serviço desejado e preencha o formulário com detalhes do seu projeto</p>
+      </div>
+      <div class="how-step">
+       <div class="how-number">
+        2
+       </div>
+       <h3 class="how-step-title">Análise &amp; Proposta</h3>
+       <p class="how-step-text">Nossa equipe analisa seu projeto e envia uma proposta personalizada automaticamente</p>
+      </div>
+      <div class="how-step">
+       <div class="how-number">
+        3
+       </div>
+       <h3 class="how-step-title">Desenvolvimento</h3>
+       <p class="how-step-text">Iniciamos a produção do seu projeto com acompanhamento em tempo real</p>
+      </div>
+      <div class="how-step">
+       <div class="how-number">
+        4
+       </div>
+       <h3 class="how-step-title">Entrega &amp; Suporte</h3>
+       <p class="how-step-text">Entregamos o projeto finalizado com suporte técnico completo</p>
+      </div>
+     </div>
+    </section>
+   </main><!-- PORTFOLIO PAGE -->
+   <main id="page-portfolio" class="portfolio-section hidden">
+    <div class="section-header">
+     <div class="section-label">
+      PORTFÓLIO COMPLETO
+     </div>
+     <h2 class="section-title">Nossos Trabalhos</h2>
+     <p class="section-subtitle">Projetos que elevam marcas</p>
+    </div>
+    <div class="filter-tabs"><button class="filter-tab active" onclick="filterPortfolio('all')">Todos</button> <button class="filter-tab" onclick="filterPortfolio('Artes e Design')">🎨 Design</button> <button class="filter-tab" onclick="filterPortfolio('Marketing e Social Media')">📢 Marketing</button> <button class="filter-tab" onclick="filterPortfolio('Sites e Programação')">💻 Sites</button>
+    </div>
+    <div id="portfolio-grid" class="portfolio-grid"></div>
+    <div id="empty-portfolio" class="empty-state hidden">
+     <div class="empty-icon">
+      📂
+     </div>
+     <p class="empty-text">Nenhum projeto encontrado</p>
+    </div>
+   </main><!-- QUOTE PAGE -->
+   <main id="page-quote" class="quote-section hidden">
+    <div class="section-header">
+     <div class="section-label">
+      SOLICITE SEU ORÇAMENTO
+     </div>
+     <h2 class="section-title">Vamos Criar Juntos</h2>
+     <p class="section-subtitle">Escolha o tipo de projeto e receba uma proposta automática</p>
+    </div>
+    <div class="quote-options">
+     <div class="quote-option" onclick="selectQuoteType('design')" id="quote-opt-design">
+      <div class="quote-icon">
+       🎨
+      </div>
+      <h3 class="quote-title">Design</h3>
+      <p class="quote-desc">Logos, identidade visual, posts, banners e artes gráficas profissionais</p>
+     </div>
+     <div class="quote-option" onclick="selectQuoteType('marketing')" id="quote-opt-marketing">
+      <div class="quote-icon">
+       📢
+      </div>
+      <h3 class="quote-title">Marketing</h3>
+      <p class="quote-desc">Anúncios, campanhas, social media, gestão de tráfego e copywriting</p>
+     </div>
+     <div class="quote-option" onclick="selectQuoteType('web')" id="quote-opt-web">
+      <div class="quote-icon">
+       💻
+      </div>
+      <h3 class="quote-title">Sites &amp; Programação</h3>
+      <p class="quote-desc">Websites, landing pages, sistemas e desenvolvimento web completo</p>
+     </div>
+    </div>
+    <div class="form-card">
+     <h3 class="form-title">📝 Formulário de Orçamento</h3>
+     <form id="quote-form"><input type="hidden" id="quote-type" value="">
+      <div class="form-grid">
+       <div class="form-group"><label for="quote-name" class="form-label">Seu Nome *</label> <input type="text" id="quote-name" class="form-input" required placeholder="Nome completo">
+       </div>
+       <div class="form-group"><label for="quote-email" class="form-label">E-mail *</label> <input type="email" id="quote-email" class="form-input" required placeholder="seu@email.com">
+       </div>
+      </div>
+      <div class="form-grid">
+       <div class="form-group"><label for="quote-phone" class="form-label">WhatsApp *</label> <input type="tel" id="quote-phone" class="form-input" required placeholder="+55 (00) 00000-0000">
+       </div>
+       <div class="form-group"><label for="quote-company" class="form-label">Empresa</label> <input type="text" id="quote-company" class="form-input" placeholder="Nome da empresa">
+       </div>
+      </div>
+      <div class="form-group"><label for="quote-project" class="form-label">Descreva seu Projeto *</label> <textarea id="quote-project" class="form-textarea" required placeholder="Conte sobre seu projeto, objetivos e expectativas..."></textarea>
+      </div><button type="submit" class="btn btn-primary" id="quote-submit-btn" style="width: 100%;"> <span>🚀 Enviar Solicitação</span> </button>
+     </form>
+    </div>
+   </main><!-- ADMIN PAGE -->
+   <main id="page-admin" class="admin-section hidden">
+    <div class="section-header">
+     <div class="section-label">
+      ⚙️ PAINEL ADMINISTRATIVO
+     </div>
+     <h2 class="section-title">Dashboard Completo</h2>
+     <p class="section-subtitle">Gerencie todo o site em um único lugar</p><button class="btn btn-danger btn-sm" onclick="logout()" style="margin-top: 20px;"> <span>🚪 Sair</span> </button>
+    </div>
+    <div class="stats-grid">
+     <div class="stat-card">
+      <div class="stat-icon">
+       📊
+      </div>
+      <h3 class="stat-value" id="stat-total">0</h3>
+      <p class="stat-label">Total de Projetos</p>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       ⏳
+      </div>
+      <h3 class="stat-value" id="stat-progress">0</h3>
+      <p class="stat-label">Em Produção</p>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       ✅
+      </div>
+      <h3 class="stat-value" id="stat-done">0</h3>
+      <p class="stat-label">Finalizados</p>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       💰
+      </div>
+      <h3 class="stat-value" id="stat-revenue">R$ 0</h3>
+      <p class="stat-label">Valor Total</p>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       📋
+      </div>
+      <h3 class="stat-value" id="stat-quotes">0</h3>
+      <p class="stat-label">Orçamentos</p>
+     </div>
+    </div><!-- Admin Tabs -->
+    <div class="admin-tabs"><button class="admin-tab active" onclick="switchAdminTab('projects')">📁 Projetos</button> <button class="admin-tab" onclick="switchAdminTab('quotes')">�� Orçamentos</button> <button class="admin-tab" onclick="switchAdminTab('site-config')">⚙️ Configurações</button> <button class="admin-tab" onclick="switchAdminTab('contacts')">📞 Contatos</button>
+    </div><!-- PROJECTS TAB -->
+    <div id="admin-tab-projects" class="admin-tab-content active">
+     <div class="form-card">
+      <h3 class="form-title">➕ Adicionar Projeto</h3>
+      <form id="project-form">
+       <div class="form-grid">
+        <div class="form-group"><label for="proj-title" class="form-label">Título *</label> <input type="text" id="proj-title" class="form-input" required placeholder="Nome do projeto">
+        </div>
+        <div class="form-group"><label for="proj-category" class="form-label">Categoria *</label> <select id="proj-category" class="form-input" required> <option value="">Selecione...</option> <option value="Artes e Design">🎨 Artes e Design</option> <option value="Marketing e Social Media">��� Marketing e Social Media</option> <option value="Sites e Programação">💻 Sites e Programação</option> </select>
+        </div>
+       </div>
+       <div class="form-group"><label for="proj-desc" class="form-label">Descrição *</label> <textarea id="proj-desc" class="form-textarea" required placeholder="Detalhes do projeto..."></textarea>
+       </div>
+       <div class="form-grid">
+        <div class="form-group"><label for="proj-client" class="form-label">Cliente</label> <input type="text" id="proj-client" class="form-input" placeholder="Nome do cliente">
+        </div>
+        <div class="form-group"><label for="proj-value" class="form-label">Valor (R$)</label> <input type="number" id="proj-value" class="form-input" placeholder="0.00" step="0.01" min="0">
+        </div>
+       </div>
+       <div class="form-grid">
+        <div class="form-group"><label for="proj-status" class="form-label">Status *</label> <select id="proj-status" class="form-input" required> <option value="Em andamento">Em andamento</option> <option value="Produção">Produção</option> <option value="Finalizado">Finalizado</option> </select>
+        </div>
+        <div class="form-group"><label for="proj-date" class="form-label">Data</label> <input type="date" id="proj-date" class="form-input">
+        </div>
+       </div>
+       <div class="form-group"><label for="proj-image" class="form-label">URL da Imagem</label> <input type="url" id="proj-image" class="form-input" placeholder="https://...">
+       </div>
+       <div class="form-grid">
+        <div class="form-group"><label for="proj-project-link" class="form-label">Link do Projeto</label> <input type="url" id="proj-project-link" class="form-input" placeholder="https://...">
+        </div>
+        <div class="form-group"><label for="proj-design-link" class="form-label">Link do Design</label> <input type="url" id="proj-design-link" class="form-input" placeholder="https://...">
+        </div>
+       </div><button type="submit" class="btn btn-primary" id="proj-submit-btn" style="width: 100%;"> <span>✨ Adicionar Projeto</span> </button>
+      </form>
+     </div>
+     <div class="form-card" style="margin-top: 40px;">
+      <h3 class="form-title">📋 Gerenciar Projetos</h3>
+      <div id="admin-projects"></div>
+      <div id="empty-admin" class="empty-state hidden">
+       <div class="empty-icon">
+        📝
+       </div>
+       <p class="empty-text">Nenhum projeto cadastrado</p>
+      </div>
+     </div>
+    </div><!-- QUOTES TAB -->
+    <div id="admin-tab-quotes" class="admin-tab-content">
+     <div class="form-card">
+      <h3 class="form-title">💬 Orçamentos Recebidos</h3>
+      <div id="admin-quotes"></div>
+      <div id="empty-quotes" class="empty-state hidden">
+       <div class="empty-icon">
+        📭
+       </div>
+       <p class="empty-text">Nenhum orçamento recebido</p>
+      </div>
+     </div>
+    </div><!-- SITE CONFIG TAB -->
+    <div id="admin-tab-site-config" class="admin-tab-content">
+     <div class="form-card">
+      <h3 class="form-title">🎨 Editar Textos do Site</h3>
+      <form id="site-config-form">
+       <div class="form-group"><label for="cfg-hero-title" class="form-label">Título Hero</label> <input type="text" id="cfg-hero-title" class="form-input" placeholder="Transformando Ideias em Realidade Digital">
+       </div>
+       <div class="form-group"><label for="cfg-hero-subtitle" class="form-label">Subtítulo Hero</label> <input type="text" id="cfg-hero-subtitle" class="form-input" placeholder="Criatividade, Inovação e Tecnologia que Brilham">
+       </div>
+       <div class="form-group"><label for="cfg-about-title" class="form-label">Título Quem Somos</label> <input type="text" id="cfg-about-title" class="form-input" placeholder="Quem Somos">
+       </div>
+       <div class="form-group"><label for="cfg-about-text" class="form-label">Texto Quem Somos</label> <textarea id="cfg-about-text" class="form-textarea" placeholder="Somos uma agência digital..."></textarea>
+       </div>
+       <div class="form-group"><label for="cfg-how-title" class="form-label">Título Como Funciona</label> <input type="text" id="cfg-how-title" class="form-input" placeholder="Como Funciona">
+       </div><button type="submit" class="btn btn-primary" style="width: 100%;"> <span>💾 Salvar Alterações</span> </button>
+      </form>
+     </div>
+    </div><!-- CONTACTS TAB -->
+    <div id="admin-tab-contacts" class="admin-tab-content">
+     <div class="form-card">
+      <h3 class="form-title">📞 Gerenciar Contatos</h3>
+      <p style="color: rgba(255,255,255,0.7); margin: 0 0 25px 0; font-size: 14px;">Informações de contato exibidas no rodapé do site</p>
+      <form id="contacts-form">
+       <div class="form-group"><label for="contact-whatsapp" class="form-label">WhatsApp</label> <input type="tel" id="contact-whatsapp" class="form-input" placeholder="+55 (00) 00000-0000">
+       </div>
+       <div class="form-group"><label for="contact-instagram" class="form-label">Instagram</label> <input type="text" id="contact-instagram" class="form-input" placeholder="@agenciatidal">
+       </div>
+       <div class="form-group"><label for="contact-facebook" class="form-label">Facebook</label> <input type="url" id="contact-facebook" class="form-input" placeholder="https://facebook.com/agenciatidal">
+       </div>
+       <div class="form-group"><label for="contact-email" class="form-label">E-mail</label> <input type="email" id="contact-email" class="form-input" placeholder="contato@agenciatidal.com">
+       </div><button type="submit" class="btn btn-primary" style="width: 100%;"> <span>💾 Salvar Contatos</span> </button>
+      </form>
+     </div>
+     <div class="form-card" style="margin-top: 40px;">
+      <h3 class="form-title">🔗 Links de Contato</h3>
+      <p style="color: rgba(255,255,255,0.7); margin: 0 0 25px 0; font-size: 14px;">URLs completas usadas nos botões e ícones de redes sociais em todo o site</p>
+      <form id="links-form">
+       <div class="form-group"><label for="link-whatsapp" class="form-label">Link WhatsApp Completo</label> <input type="text" id="link-whatsapp" class="form-input" placeholder="https://wa.me/5511999999999?text=Olá!">
+        <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 8px 0 0 0;">Formato: https://wa.me/5511999999999?text=Sua%20mensagem</p>
+       </div>
+       <div class="form-group"><label for="link-instagram" class="form-label">Link Instagram Completo</label> <input type="text" id="link-instagram" class="form-input" placeholder="https://instagram.com/seuperfil">
+        <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 8px 0 0 0;">Formato: https://instagram.com/seuperfil</p>
+       </div>
+       <div class="form-group"><label for="link-facebook" class="form-label">Link Facebook Completo</label> <input type="text" id="link-facebook" class="form-input" placeholder="https://facebook.com/suapagina">
+        <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 8px 0 0 0;">Formato: https://facebook.com/suapagina</p>
+       </div>
+       <div class="form-group"><label for="link-email" class="form-label">Link E-mail Completo</label> <input type="text" id="link-email" class="form-input" placeholder="mailto:seuemail@exemplo.com?subject=Assunto">
+        <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 8px 0 0 0;">Formato: mailto:seuemail@exemplo.com?subject=Assunto</p>
+       </div><button type="submit" class="btn btn-primary" style="width: 100%;"> <span>🔗 Salvar Links</span> </button>
+      </form>
+     </div>
+    </div>
+   </main><!-- Footer -->
+   <footer class="footer">
+    <div class="footer-content">
+     <div class="footer-column">
+      <div class="footer-logo-text">
+       TIDAL
+      </div>
+      <p class="footer-text" id="footer-text">Agência TIDAL - Transformando o digital com criatividade, inovação e tecnologia de ponta</p>
+      <div class="footer-social"><a href="#" class="social-link" id="footer-whatsapp" target="_blank" rel="noopener noreferrer">📱</a> <a href="#" class="social-link" id="footer-instagram" target="_blank" rel="noopener noreferrer">📷</a> <a href="#" class="social-link" id="footer-facebook" target="_blank" rel="noopener noreferrer">👥</a> <a href="mailto:contato@agenciatidal.com" class="social-link" id="footer-email">✉️</a>
+      </div>
+     </div>
+     <div class="footer-column">
+      <h3>Links Rápidos</h3>
+      <ul class="footer-links">
+       <li><a href="#" class="footer-link" onclick="navigateTo('home')">Início</a></li>
+       <li><a href="#" class="footer-link" onclick="navigateTo('portfolio')">Portfólio</a></li>
+       <li><a href="#" class="footer-link" onclick="navigateTo('quote')">Orçamento</a></li>
+      </ul>
+     </div>
+     <div class="footer-column">
+      <h3>Serviços</h3>
+      <ul class="footer-links">
+       <li><a href="#" class="footer-link" onclick="navigateTo('quote', 'design')">Design Criativo</a></li>
+       <li><a href="#" class="footer-link" onclick="navigateTo('quote', 'marketing')">Marketing Digital</a></li>
+       <li><a href="#" class="footer-link" onclick="navigateTo('quote', 'web')">Sites &amp; Programação</a></li>
+      </ul>
+     </div>
+     <div class="footer-column">
+      <h3>Contato</h3>
+      <ul class="footer-links">
+       <li><span class="footer-link" style="cursor: default;"><span id="footer-contact-whatsapp">+55 (00) 00000-0000</span></span></li>
+       <li><span class="footer-link" style="cursor: default;"><span id="footer-contact-instagram">@agenciatidal</span></span></li>
+       <li><span class="footer-link" style="cursor: default;"><span id="footer-contact-email">contato@agenciatidal.com</span></span></li>
+      </ul>
+     </div>
+    </div>
+    <div class="footer-bottom">
+     <p>© 2024 Agência TIDAL. Todos os direitos reservados.</p>
+     <p><a href="#" class="admin-link" onclick="navigateTo('admin')">🔐 Admin</a></p>
+    </div>
+   </footer>
+  </div>
+  <script>
+        // Config
+        const defaultConfig = {
+            background_color: "#0a0a0a",
+            primary_color: "#00ff88",
+            secondary_color: "#ff1493",
+            text_color: "#ffffff",
+            hero_title: "Transformando Ideias em Realidade Digital",
+            hero_subtitle: "Criatividade, Inovação e Tecnologia que Brilham",
+            about_title: "Quem Somos",
+            about_text: "Somos uma agência digital especializada em criar experiências únicas e memoráveis. Com foco em inovação, criatividade e tecnologia de ponta, transformamos ideias em soluções digitais que geram resultados reais. Nossa equipe de especialistas trabalha com dedicação para entregar projetos que superam expectativas e elevam marcas a um novo patamar.",
+            how_title: "Como Funciona",
+            footer_text: "Agência TIDAL - Transformando o digital com criatividade, inovação e tecnologia de ponta",
+            contact_whatsapp: "+55 (00) 00000-0000",
+            contact_instagram: "@agenciatidal",
+            contact_facebook: "https://facebook.com/agenciatidal",
+            contact_email: "contato@agenciatidal.com",
+            link_whatsapp: "https://wa.me/5500000000000?text=Olá!%20Quero%20fazer%20um%20orçamento%20com%20a%20Agência%20TIDAL.",
+            link_instagram: "https://instagram.com/agenciatidal",
+            link_facebook: "https://facebook.com/agenciatidal",
+            link_email: "mailto:contato@agenciatidal.com?subject=Contato%20Agência%20TIDAL"
+        };
+
+        // State
+        let currentPage = 'home';
+        let currentFilter = 'all';
+        let currentAdminTab = 'projects';
+        let projects = [];
+        let quotes = [];
+        let isAuthenticated = false;
+        let selectedQuoteType = '';
+
+        const CREDENTIALS = {
+            username: 'AGÊNCIATIDAL2027',
+            password: '0404lui*'
+        };
+
+        // Navigation
+        function navigateTo(page, param = null) {
+            if (page === 'admin' && !isAuthenticated) {
+                showAdminLogin();
+                return;
+            }
+
+            document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+            const pageEl = document.getElementById(`page-${page}`);
+            if (pageEl) pageEl.classList.remove('hidden');
+
+            const navIndex = { 'home': 0, 'portfolio': 1, 'quote': 2 }[page];
+            if (navIndex !== undefined) {
+                document.querySelectorAll('.nav-btn')[navIndex].classList.add('active');
+            }
+
+            currentPage = page;
+
+            if (page === 'portfolio') {
+                if (param) filterPortfolio(param);
+                else renderPortfolio();
+            } else if (page === 'admin') {
+                renderAdminProjects();
+                renderAdminQuotes();
+                loadSiteConfigForm();
+                loadContactsForm();
+                updateStats();
+            } else if (page === 'home') {
+                renderHomePreview();
+            } else if (page === 'quote' && param) {
+                selectQuoteType(param);
+            }
+
+            closeMobileMenu();
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('open');
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.remove('open');
+        }
+
+        // Admin Tabs
+        function switchAdminTab(tab) {
+            currentAdminTab = tab;
+            
+            document.querySelectorAll('.admin-tab').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.admin-tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            const content = document.getElementById(`admin-tab-${tab}`);
+            if (content) content.classList.add('active');
+
+            if (tab === 'quotes') renderAdminQuotes();
+            else if (tab === 'projects') renderAdminProjects();
+            else if (tab === 'site-config') loadSiteConfigForm();
+            else if (tab === 'contacts') loadContactsForm();
+        }
+
+        // Login
+        function showAdminLogin() {
+            document.getElementById('login-modal').classList.remove('hidden');
+            document.getElementById('login-error').classList.remove('show');
+        }
+
+        function hideLogin() {
+            document.getElementById('login-modal').classList.add('hidden');
+        }
+
+        function logout() {
+            isAuthenticated = false;
+            navigateTo('home');
+            showToast('👋 Logout realizado com sucesso!');
+        }
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === CREDENTIALS.username && password === CREDENTIALS.password) {
+                isAuthenticated = true;
+                hideLogin();
+                navigateTo('admin');
+                showToast('✅ Login realizado com sucesso!');
+            } else {
+                document.getElementById('login-error').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('login-error').classList.remove('show');
+                }, 3000);
+            }
+        });
+
+        // Quote
+        function selectQuoteType(type) {
+            selectedQuoteType = type;
+            document.getElementById('quote-type').value = type;
+            
+            document.querySelectorAll('.quote-option').forEach(opt => opt.classList.remove('selected'));
+            const option = document.getElementById(`quote-opt-${type}`);
+            if (option) option.classList.add('selected');
+        }
+
+        document.getElementById('quote-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!selectedQuoteType) {
+                showToast('❌ Selecione um tipo de serviço!', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('quote-submit-btn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span>';
+
+            if (quotes.length >= 999) {
+                showToast('❌ Limite de orçamentos atingido!', 'error');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            const name = document.getElementById('quote-name').value;
+            const email = document.getElementById('quote-email').value;
+            const phone = document.getElementById('quote-phone').value;
+            const company = document.getElementById('quote-company').value || '';
+            const projectDesc = document.getElementById('quote-project').value;
+
+            const quoteData = {
+                id: `quote_${Date.now()}`,
+                type: 'quote',
+                service_type: selectedQuoteType,
+                name: name,
+                email: email,
+                phone: phone,
+                company: company,
+                project_description: projectDesc,
+                created_at: new Date().toISOString()
+            };
+
+            const result = await window.dataSdk.create(quoteData);
+
+            if (result.isOk) {
+                generateQuoteMessages(name, email, phone, company, selectedQuoteType, projectDesc);
+                this.reset();
+                selectedQuoteType = '';
+                document.querySelectorAll('.quote-option').forEach(opt => opt.classList.remove('selected'));
+            } else {
+                showToast('❌ Erro ao enviar. Tente novamente.', 'error');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        });
+
+        // Generate Quote Messages and Send Automatically
+        function generateQuoteMessages(name, email, phone, company, serviceType, description) {
+            const serviceInfo = {
+                'design': {
+                    name: 'Design Criativo',
+                    icon: '🎨',
+                    details: 'Design responsivo ou arte premium, identidade visual completa, manual de marca',
+                    pricing: 'A partir de R$ 500,00',
+                    deliveryTime: '5-7 dias úteis'
+                },
+                'marketing': {
+                    name: 'Marketing Digital',
+                    icon: '📢',
+                    details: 'Gestão de redes sociais, campanhas de anúncios, tráfego pago, conteúdo estratégico',
+                    pricing: 'A partir de R$ 800,00/mês',
+                    deliveryTime: 'Início imediato'
+                },
+                'web': {
+                    name: 'Sites & Programação',
+                    icon: '💻',
+                    details: 'SEO otimizado, hospedagem inclusa (se aplicável), suporte técnico completo',
+                    pricing: 'A partir de R$ 1.500,00',
+                    deliveryTime: '10-15 dias úteis'
+                }
+            };
+
+            const service = serviceInfo[serviceType];
+            const companyText = company ? ` da empresa ${company}` : '';
+
+            // WhatsApp Message
+            const whatsappMessage = `🌊 *AGÊNCIA TIDAL* - Orçamento Recebido!
+
+Olá, *${name}*! 👋
+
+Ficamos muito felizes com seu interesse${companyText}!
+
+${service.icon} *SERVIÇO SOLICITADO*
+${service.name}
+
+📋 *SEU PROJETO*
+${description}
+
+✨ *O QUE VAMOS ENTREGAR*
+${service.details}
+
+💸 *INVESTIMENTO*
+${service.pricing}
+
+⏱️ *PRAZO DE ENTREGA*
+${service.deliveryTime}
+
+🧠 *RESUMO INTELIGENTE*
+Identificamos que você busca uma solução profissional em ${service.name}. Nossa equipe está pronta para transformar sua visão em realidade com criatividade e tecnologia de ponta.
+
+🚀 *PRÓXIMOS PASSOS*
+Nossa equipe entrará em contato em até 24 horas para:
+• Entender melhor seu projeto
+• Apresentar proposta personalizada
+• Tirar todas as suas dúvidas
+
+Obrigado por escolher a Agência TIDAL! 🌐✨
+
+_Transformando o digital com criatividade e inovação_`;
+
+            // Email Subject
+            const emailSubject = `Orçamento Recebido - ${service.name} | Agência TIDAL`;
+
+            // Email Body (Plain Text for mailto)
+            const emailBody = `Olá, ${name}!
+
+Ficamos muito felizes com seu interesse${companyText}!
+
+SERVIÇO SOLICITADO: ${service.name}
+
+SEU PROJETO:
+${description}
+
+O QUE VAMOS ENTREGAR:
+${service.details}
+
+INVESTIMENTO:
+${service.pricing}
+
+PRAZO DE ENTREGA:
+${service.deliveryTime}
+
+RESUMO INTELIGENTE:
+Identificamos que você busca uma solução profissional em ${service.name}. Nossa equipe está pronta para transformar sua visão em realidade com criatividade e tecnologia de ponta.
+
+PRÓXIMOS PASSOS:
+Nossa equipe entrará em contato em até 24 horas para:
+• Entender melhor seu projeto
+• Apresentar proposta personalizada
+• Tirar todas as suas dúvidas
+
+Obrigado por escolher a Ag��ncia TIDAL!
+
+---
+Agência TIDAL
+Transformando o digital com criatividade e inovação
+WhatsApp: ${phone}
+E-mail: ${email}`;
+
+            // Auto-open WhatsApp and Email
+            const whatsappUrl = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+            const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+            // Open WhatsApp first
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+            // Open Email after a short delay
+            setTimeout(() => {
+                window.open(mailtoUrl, '_blank', 'noopener,noreferrer');
+            }, 1000);
+
+            showToast('✅ Orçamento enviado! WhatsApp e E-mail abertos automaticamente.');
+        }
+
+        // Portfolio
+        function filterPortfolio(category) {
+            currentFilter = category;
+            
+            document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+            
+            renderPortfolio();
+        }
+
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolio-grid');
+            const empty = document.getElementById('empty-portfolio');
+
+            let filtered = projects;
+            if (currentFilter !== 'all') {
+                filtered = projects.filter(p => p.category === currentFilter);
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            grid.innerHTML = filtered.map(renderProjectCard).join('');
+        }
+
+        function renderHomePreview() {
+            const container = document.getElementById('home-preview');
+            const latest = projects.slice(0, 6);
+
+            if (latest.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-icon">🎨</div><p class="empty-text">Projetos incríveis em breve!</p></div>';
+                return;
+            }
+
+            container.innerHTML = latest.map(renderProjectCard).join('');
+        }
+
+        function renderProjectCard(project) {
+            const icon = {
+                'Artes e Design': '🎨',
+                'Marketing e Social Media': '📢',
+                'Sites e Programação': '💻'
+            }[project.category] || '📁';
+
+            const links = [];
+            if (project.project_link) links.push(`<a href="${project.project_link}" target="_blank" rel="noopener noreferrer" class="portfolio-link">🔗 Ver Projeto</a>`);
+            if (project.design_link) links.push(`<a href="${project.design_link}" target="_blank" rel="noopener noreferrer" class="portfolio-link">🎨 Ver Design</a>`);
+
+            return `
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        ${project.image_url ? 
+                            `<img src="${project.image_url}" alt="${project.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='${icon}';">` : 
+                            icon
+                        }
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">${project.category}</span>
+                        <h3 class="portfolio-title">${project.title}</h3>
+                        <p class="portfolio-description">${project.description}</p>
+                        ${project.client_name ? `<p class="portfolio-description"><strong>Cliente:</strong> ${project.client_name}</p>` : ''}
+                        ${links.length > 0 ? `<div class="portfolio-links">${links.join('')}</div>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Admin - Projects
+        document.getElementById('project-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('proj-submit-btn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span>';
+
+            if (projects.length >= 999) {
+                showToast('❌ Limite de 999 projetos atingido!', 'error');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            const projectData = {
+                id: `proj_${Date.now()}`,
+                type: 'project',
+                title: document.getElementById('proj-title').value,
+                category: document.getElementById('proj-category').value,
+                description: document.getElementById('proj-desc').value,
+                client_name: document.getElementById('proj-client').value || '',
+                value: parseFloat(document.getElementById('proj-value').value) || 0,
+                status: document.getElementById('proj-status').value,
+                date: document.getElementById('proj-date').value || new Date().toISOString().split('T')[0],
+                image_url: document.getElementById('proj-image').value || '',
+                project_link: document.getElementById('proj-project-link').value || '',
+                design_link: document.getElementById('proj-design-link').value || '',
+                created_at: new Date().toISOString()
+            };
+
+            const result = await window.dataSdk.create(projectData);
+
+            if (result.isOk) {
+                showToast('✅ Projeto adicionado!');
+                this.reset();
+            } else {
+                showToast('❌ Erro ao adicionar projeto.', 'error');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        });
+
+        function renderAdminProjects() {
+            const container = document.getElementById('admin-projects');
+            const empty = document.getElementById('empty-admin');
+
+            if (projects.length === 0) {
+                container.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            container.innerHTML = projects.map(project => {
+                const icon = {
+                    'Artes e Design': '🎨',
+                    'Marketing e Social Media': '📢',
+                    'Sites e Programação': '💻'
+                }[project.category] || '📁';
+
+                return `
+                    <div class="project-item">
+                        <h4 style="color: #00ff88; margin: 0 0 15px 0;">${icon} ${project.title}</h4>
+                        <p style="color: rgba(255,255,255,0.7); margin: 0 0 10px 0;">${project.description}</p>
+                        ${project.client_name ? `<p style="color: rgba(255,255,255,0.6); margin: 0 0 10px 0;"><strong>Cliente:</strong> ${project.client_name}</p>` : ''}
+                        <p style="color: rgba(255,255,255,0.6); margin: 0 0 10px 0;"><strong>Status:</strong> ${project.status}</p>
+                        ${project.value > 0 ? `<p style="color: rgba(255,255,255,0.6); margin: 0 0 10px 0;"><strong>Valor:</strong> R$ ${project.value.toFixed(2)}</p>` : ''}
+                        <div class="project-actions">
+                            <div id="del-${project.__backendId}">
+                                <button class="btn btn-sm btn-danger" onclick="confirmDeleteProject('${project.__backendId}')">
+                                    <span>�����️ Deletar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function confirmDeleteProject(backendId) {
+            const container = document.getElementById(`del-${backendId}`);
+            container.innerHTML = `
+                <div style="display: inline-flex; gap: 10px;">
+                    <button class="btn btn-sm btn-danger" onclick="deleteProject('${backendId}')">
+                        <span>✓ Confirmar</span>
+                    </button>
+                    <button class="btn btn-sm btn-secondary" onclick="renderAdminProjects()">
+                        <span>✕ Cancelar</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        async function deleteProject(backendId) {
+            const project = projects.find(p => p.__backendId === backendId);
+            if (!project) return;
+
+            const result = await window.dataSdk.delete(project);
+
+            if (result.isOk) {
+                showToast('🗑️ Projeto deletado!');
+            } else {
+                showToast('❌ Erro ao deletar.', 'error');
+            }
+        }
+
+        // Admin - Quotes
+        function renderAdminQuotes() {
+            const container = document.getElementById('admin-quotes');
+            const empty = document.getElementById('empty-quotes');
+
+            if (quotes.length === 0) {
+                container.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            container.innerHTML = quotes.map(quote => {
+                const date = new Date(quote.created_at);
+                const formattedDate = date.toLocaleDateString('pt-BR') + ' às ' + date.toLocaleTimeString('pt-BR');
+
+                const serviceIcon = {
+                    'design': '🎨',
+                    'marketing': '📢',
+                    'web': '💻'
+                }[quote.service_type] || '📋';
+
+                return `
+                    <div class="project-item" style="border-color: rgba(255, 20, 147, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+                            <h4 style="color: #ff1493; margin: 0;">${serviceIcon} ${quote.service_type.toUpperCase()}</h4>
+                            <span style="font-size: 12px; color: rgba(255,255,255,0.5);">${formattedDate}</span>
+                        </div>
+                        <p style="color: #ffffff; margin: 0 0 10px 0; font-size: 18px; font-weight: bold;">${quote.name}</p>
+                        ${quote.company ? `<p style="color: rgba(255,255,255,0.6); margin: 0 0 10px 0;">${quote.company}</p>` : ''}
+                        <p style="color: rgba(255,255,255,0.7); margin: 0 0 10px 0;"><strong>E-mail:</strong> ${quote.email}</p>
+                        <p style="color: rgba(255,255,255,0.7); margin: 0 0 10px 0;"><strong>WhatsApp:</strong> ${quote.phone}</p>
+                        <p style="color: rgba(255,255,255,0.7); margin: 0 0 15px 0;"><strong>Projeto:</strong> ${quote.project_description}</p>
+                        <div class="project-actions">
+                            <a href="https://wa.me/${quote.phone.replace(/\D/g, '')}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                                <span>📱 WhatsApp</span>
+                            </a>
+                            <a href="mailto:${quote.email}" class="btn btn-sm btn-secondary">
+                                <span>📧 E-mail</span>
+                            </a>
+                            <div id="del-quote-${quote.__backendId}">
+                                <button class="btn btn-sm btn-danger" onclick="confirmDeleteQuote('${quote.__backendId}')">
+                                    <span>🗑️ Deletar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function confirmDeleteQuote(backendId) {
+            const container = document.getElementById(`del-quote-${backendId}`);
+            container.innerHTML = `
+                <div style="display: inline-flex; gap: 10px;">
+                    <button class="btn btn-sm btn-danger" onclick="deleteQuote('${backendId}')">
+                        <span>✓ Confirmar</span>
+                    </button>
+                    <button class="btn btn-sm btn-secondary" onclick="renderAdminQuotes()">
+                        <span>✕ Cancelar</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        async function deleteQuote(backendId) {
+            const quote = quotes.find(q => q.__backendId === backendId);
+            if (!quote) return;
+
+            const result = await window.dataSdk.delete(quote);
+
+            if (result.isOk) {
+                showToast('🗑️ Orçamento deletado!');
+            } else {
+                showToast('❌ Erro ao deletar.', 'error');
+            }
+        }
+
+        // Admin - Site Config
+        function loadSiteConfigForm() {
+            const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+            
+            document.getElementById('cfg-hero-title').value = config.hero_title || defaultConfig.hero_title;
+            document.getElementById('cfg-hero-subtitle').value = config.hero_subtitle || defaultConfig.hero_subtitle;
+            document.getElementById('cfg-about-title').value = config.about_title || defaultConfig.about_title;
+            document.getElementById('cfg-about-text').value = config.about_text || defaultConfig.about_text;
+            document.getElementById('cfg-how-title').value = config.how_title || defaultConfig.how_title;
+        }
+
+        document.getElementById('site-config-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!window.elementSdk) {
+                showToast('❌ SDK não dispon��vel.', 'error');
+                return;
+            }
+
+            const updates = {
+                hero_title: document.getElementById('cfg-hero-title').value,
+                hero_subtitle: document.getElementById('cfg-hero-subtitle').value,
+                about_title: document.getElementById('cfg-about-title').value,
+                about_text: document.getElementById('cfg-about-text').value,
+                how_title: document.getElementById('cfg-how-title').value
+            };
+
+            await window.elementSdk.setConfig(updates);
+            showToast('✅ Configurações salvas!');
+        });
+
+        // Admin - Contacts
+        function loadContactsForm() {
+            const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+            
+            document.getElementById('contact-whatsapp').value = config.contact_whatsapp || defaultConfig.contact_whatsapp;
+            document.getElementById('contact-instagram').value = config.contact_instagram || defaultConfig.contact_instagram;
+            document.getElementById('contact-facebook').value = config.contact_facebook || defaultConfig.contact_facebook;
+            document.getElementById('contact-email').value = config.contact_email || defaultConfig.contact_email;
+
+            document.getElementById('link-whatsapp').value = config.link_whatsapp || defaultConfig.link_whatsapp;
+            document.getElementById('link-instagram').value = config.link_instagram || defaultConfig.link_instagram;
+            document.getElementById('link-facebook').value = config.link_facebook || defaultConfig.link_facebook;
+            document.getElementById('link-email').value = config.link_email || defaultConfig.link_email;
+        }
+
+        document.getElementById('contacts-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!window.elementSdk) {
+                showToast('❌ SDK não disponível.', 'error');
+                return;
+            }
+
+            const updates = {
+                contact_whatsapp: document.getElementById('contact-whatsapp').value,
+                contact_instagram: document.getElementById('contact-instagram').value,
+                contact_facebook: document.getElementById('contact-facebook').value,
+                contact_email: document.getElementById('contact-email').value
+            };
+
+            await window.elementSdk.setConfig(updates);
+            showToast('✅ Contatos atualizados!');
+        });
+
+        document.getElementById('links-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!window.elementSdk) {
+                showToast('❌ SDK não disponível.', 'error');
+                return;
+            }
+
+            const updates = {
+                link_whatsapp: document.getElementById('link-whatsapp').value,
+                link_instagram: document.getElementById('link-instagram').value,
+                link_facebook: document.getElementById('link-facebook').value,
+                link_email: document.getElementById('link-email').value
+            };
+
+            await window.elementSdk.setConfig(updates);
+            showToast('✅ Links atualizados! Todos os botões do site foram alterados.');
+        });
+
+        function updateStats() {
+            const total = projects.length;
+            const inProgress = projects.filter(p => p.status === 'Produção').length;
+            const done = projects.filter(p => p.status === 'Finalizado').length;
+            const revenue = projects.reduce((sum, p) => sum + (p.value || 0), 0);
+            const quotesCount = quotes.length;
+
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-progress').textContent = inProgress;
+            document.getElementById('stat-done').textContent = done;
+            document.getElementById('stat-revenue').textContent = `R$ ${revenue.toFixed(2)}`;
+            document.getElementById('stat-quotes').textContent = quotesCount;
+        }
+
+        // Toast
+        function showToast(message, type = 'success') {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        // Element SDK
+        async function onConfigChange(config) {
+            const heroTitle = config.hero_title || defaultConfig.hero_title;
+            const heroSubtitle = config.hero_subtitle || defaultConfig.hero_subtitle;
+            const aboutTitle = config.about_title || defaultConfig.about_title;
+            const aboutText = config.about_text || defaultConfig.about_text;
+            const howTitle = config.how_title || defaultConfig.how_title;
+            const footerText = config.footer_text || defaultConfig.footer_text;
+            const whatsapp = config.contact_whatsapp || defaultConfig.contact_whatsapp;
+            const instagram = config.contact_instagram || defaultConfig.contact_instagram;
+            const facebook = config.contact_facebook || defaultConfig.contact_facebook;
+            const email = config.contact_email || defaultConfig.contact_email;
+
+            const heroTitleEl = document.getElementById('hero-title');
+            if (heroTitleEl) heroTitleEl.textContent = heroTitle;
+
+            const heroSubtitleEl = document.getElementById('hero-subtitle');
+            if (heroSubtitleEl) heroSubtitleEl.textContent = heroSubtitle;
+
+            const aboutTitleEl = document.getElementById('about-title');
+            if (aboutTitleEl) aboutTitleEl.textContent = aboutTitle;
+
+            const aboutTextEl = document.getElementById('about-text');
+            if (aboutTextEl) aboutTextEl.textContent = aboutText;
+
+            const howTitleEl = document.getElementById('how-title');
+            if (howTitleEl) howTitleEl.textContent = howTitle;
+
+            const footerTextEl = document.getElementById('footer-text');
+            if (footerTextEl) footerTextEl.textContent = footerText;
+
+            const footerContactWhatsappEl = document.getElementById('footer-contact-whatsapp');
+            if (footerContactWhatsappEl) footerContactWhatsappEl.textContent = whatsapp;
+
+            const footerContactInstagramEl = document.getElementById('footer-contact-instagram');
+            if (footerContactInstagramEl) footerContactInstagramEl.textContent = instagram;
+
+            const footerContactEmailEl = document.getElementById('footer-contact-email');
+            if (footerContactEmailEl) footerContactEmailEl.textContent = email;
+
+            const linkWhatsapp = config.link_whatsapp || defaultConfig.link_whatsapp;
+            const linkInstagram = config.link_instagram || defaultConfig.link_instagram;
+            const linkFacebook = config.link_facebook || defaultConfig.link_facebook;
+            const linkEmail = config.link_email || defaultConfig.link_email;
+
+            const footerWhatsappLink = document.getElementById('footer-whatsapp');
+            if (footerWhatsappLink) {
+                footerWhatsappLink.href = linkWhatsapp;
+                footerWhatsappLink.target = '_blank';
+                footerWhatsappLink.rel = 'noopener noreferrer';
+            }
+
+            const footerInstagramLink = document.getElementById('footer-instagram');
+            if (footerInstagramLink) {
+                footerInstagramLink.href = linkInstagram;
+                footerInstagramLink.target = '_blank';
+                footerInstagramLink.rel = 'noopener noreferrer';
+            }
+
+            const footerFacebookLink = document.getElementById('footer-facebook');
+            if (footerFacebookLink) {
+                footerFacebookLink.href = linkFacebook;
+                footerFacebookLink.target = '_blank';
+                footerFacebookLink.rel = 'noopener noreferrer';
+            }
+
+            const footerEmailLink = document.getElementById('footer-email');
+            if (footerEmailLink) {
+                footerEmailLink.href = linkEmail;
+            }
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            config.background_color = value;
+                            if (window.elementSdk) window.elementSdk.setConfig({ background_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.primary_color || defaultConfig.primary_color,
+                        set: (value) => {
+                            config.primary_color = value;
+                            if (window.elementSdk) window.elementSdk.setConfig({ primary_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.secondary_color || defaultConfig.secondary_color,
+                        set: (value) => {
+                            config.secondary_color = value;
+                            if (window.elementSdk) window.elementSdk.setConfig({ secondary_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["hero_title", config.hero_title || defaultConfig.hero_title],
+                ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                ["about_title", config.about_title || defaultConfig.about_title],
+                ["about_text", config.about_text || defaultConfig.about_text],
+                ["how_title", config.how_title || defaultConfig.how_title],
+                ["footer_text", config.footer_text || defaultConfig.footer_text],
+                ["contact_whatsapp", config.contact_whatsapp || defaultConfig.contact_whatsapp],
+                ["contact_instagram", config.contact_instagram || defaultConfig.contact_instagram],
+                ["contact_facebook", config.contact_facebook || defaultConfig.contact_facebook],
+                ["contact_email", config.contact_email || defaultConfig.contact_email],
+                ["link_whatsapp", config.link_whatsapp || defaultConfig.link_whatsapp],
+                ["link_instagram", config.link_instagram || defaultConfig.link_instagram],
+                ["link_facebook", config.link_facebook || defaultConfig.link_facebook],
+                ["link_email", config.link_email || defaultConfig.link_email]
+            ]);
+        }
+
+        // Data SDK
+        const dataHandler = {
+            onDataChanged(data) {
+                projects = data.filter(item => item.type === 'project');
+                quotes = data.filter(item => item.type === 'quote');
+
+                if (currentPage === 'portfolio') {
+                    renderPortfolio();
+                } else if (currentPage === 'admin') {
+                    if (currentAdminTab === 'projects') renderAdminProjects();
+                    else if (currentAdminTab === 'quotes') renderAdminQuotes();
+                    updateStats();
+                } else if (currentPage === 'home') {
+                    renderHomePreview();
+                }
+            }
+        };
+
+        // Init
+        async function init() {
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange,
+                    mapToCapabilities,
+                    mapToEditPanelValues
+                });
+            }
+
+            if (window.dataSdk) {
+                const result = await window.dataSdk.init(dataHandler);
+                if (!result.isOk) {
+                    showToast('❌ Erro ao inicializar sistema.', 'error');
+                }
+            }
+
+            renderHomePreview();
+        }
+
+        init();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a20f8350756f198',t:'MTc2MzczNjMxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
